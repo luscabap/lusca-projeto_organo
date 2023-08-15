@@ -17,7 +17,7 @@ Basicamente, o site gera cartões individuais de perfil para membros de uma equi
 Esse foi o meu primeiro projeto desenvolvido com React, nele aprendi como os componentes funcionam, como passar props entre eles, a usar o useState e a como funciona a mudança dos estados, usei também o uuid, para gerar códigos únicos para identificar o nome dos times.
 Esse projeto marcou minha primeira experiência com desenvolvimento em React. Através dele, adquiri habilidades na compreensão da funcionalidade dos componentes, na propagação de propriedades (props), no uso do useState para gerenciamento de estados, e compreendi a manipulação de estados. A utilização do uuid auxiliou na geração de códigos únicos para identificação dos nomes das equipes.
 
-Deploy do projeto: 
+Deploy do projeto: https://lusca-projeto-organo.vercel.app/
 
 ---
 
