@@ -1,44 +1,46 @@
 import { useState } from "react";
-import Banner from "./componentes/Banner";
+import Banner from './componentes/Banner'
 import Formulario from "./componentes/Formulario";
 import Time from "./componentes/Time";
 import Rodape from "./componentes/Rodape";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
+import { IColaborador } from "./shared/interfaces/IColaborador";
+import { ITime } from "./shared/interfaces/ITime";
 
 function App() {
-  const [times, setTimes] = useState([
+  const [times, setTimes] = useState<ITime[]>([
     {
-      id: uuidv4(),
+      id: 1,
       nome: "Programação",
       cor: "#D9F7E9",
     },
     {
-      id: uuidv4(),
+      id: 2,
       nome: "Front-End",
       cor: "#E8F8FF",
     },
     {
-      id: uuidv4(),
+      id: 3,
       nome: "Data Science",
       cor: "#F0F8E2",
     },
     {
-      id: uuidv4(),
+      id: 4,
       nome: "Devops",
       cor: "#FDE7E8",
     },
     {
-      id: uuidv4(),
+      id: 5,
       nome: "UX e Design",
       cor: "#FAE9F5",
     },
     {
-      id: uuidv4(),
+      id: 6,
       nome: "Mobile",
       cor: "#FFF5D9",
     },
     {
-      id: uuidv4(),
+      id: 7,
       nome: "Inovação e Gestão",
       cor: "#FFEEDF",
     },
@@ -46,7 +48,7 @@ function App() {
 
   const inicial = [
     {
-      id: uuidv4(),
+      id: 1,
       favorito: false,
       nome: "LUCAS BAPTISTA DA SILVA",
       cargo: "Desenvolvedor Júnior Front-End",
@@ -260,19 +262,19 @@ function App() {
     */
   ];
 
-  const [colaboradores, setColaboradores] = useState(inicial);
+  const [colaboradores, setColaboradores] = useState<IColaborador[]>(inicial);
 
-  const aoNovoColaboradorAdicionado = (colaborador) => {
+  const aoNovoColaboradorAdicionado = (colaborador: IColaborador) => {
     setColaboradores([...colaboradores, colaborador]);
   };
 
-  function deletarColaborador(id) {
+  function deletarColaborador(id: string) {
     setColaboradores(
       colaboradores.filter((colaborador) => colaborador.id !== id)
     );
   }
 
-  function mudarCorDoTime(cor, id) {
+  function mudarCorDoTime({cor, id}: any) {
     setTimes(
       times.map((time) => {
         if (time.id === id) {
@@ -283,11 +285,11 @@ function App() {
     );
   }
 
-  function cadastrarTime(novoTime){
-    setTimes([...times, { ...novoTime, id: uuidv4() } ])
+  function cadastrarTime(novoTime: any){
+    setTimes([...times, { ...novoTime, id: 1 } ])
   }
 
-  function resolverFavorito(id){
+  function resolverFavorito(id: any){
     setColaboradores(
       colaboradores.map((colaborador) => {
         if(colaborador.id === id){
@@ -299,11 +301,14 @@ function App() {
 
   return (
     <div className="App">
-      <Banner />
+      <Banner 
+        enderecoImagem="/imagens/banner.png"
+        textoAlternativo="O banner principal da página do Organo"
+      />
       <Formulario
         cadastrarTime={cadastrarTime}
         times={times.map((time) => time.nome)}
-        aoColaboradorCadastrado={(colaborador) =>
+        aoColaboradorCadastrado={(colaborador:any) =>
           aoNovoColaboradorAdicionado(colaborador)
         }
       />

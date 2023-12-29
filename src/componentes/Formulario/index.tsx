@@ -1,24 +1,33 @@
+import { useState } from "react";
+import { IColaboradorCadastrado } from "../../shared/interfaces/IColaboradorCadastrado";
 import Botao from "../Botao";
-import Campo from "../Campo";
+import CampoTexto from "../CampoTexto";
 import ListaSuspensa from "../ListaSuspensa";
 import "./Formulario.css";
-import { useState } from "react";
 
-const Formulario = ({ aoColaboradorCadastrado, times, cadastrarTime }) => {
+interface FormularioProps {
+  aoColaboradorCadastrado: (colaborador: IColaboradorCadastrado) => void
+  times: string[]
+  cadastrarTime: any
+}
+
+const Formulario = ({ aoColaboradorCadastrado, times, cadastrarTime }: FormularioProps) => {
   const [nome, setNome] = useState("");
   const [cargo, setCargo] = useState("");
   const [imagem, setImagem] = useState("");
   const [time, setTime] = useState("");
   const [nomeTime, setNomeTime] = useState("");
   const [corTime, setCorTime] = useState("");
+  const [data, setData] = useState("");
 
-  const aoSalvar = (e) => {
-    e.preventDefault();
+  const aoSalvar = (evento: React.FormEvent<HTMLFormElement>) => {
+    evento.preventDefault();
     aoColaboradorCadastrado({
       nome,
       cargo,
       imagem,
       time,
+      data
     });
     setNome("");
     setCargo("");
@@ -30,22 +39,29 @@ const Formulario = ({ aoColaboradorCadastrado, times, cadastrarTime }) => {
     <section className="formulario">
       <form onSubmit={aoSalvar}>
         <h2>Preencha os dados para criar o card do colaborador.</h2>
-        <Campo
+        <CampoTexto
           label="Nome"
           valor={nome}
           aoAlterado={(valor) => setNome(valor)}
         />
 
-        <Campo
+        <CampoTexto
           label="Cargo"
           valor={cargo}
           aoAlterado={(valor) => setCargo(valor)}
         />
 
-        <Campo
+        <CampoTexto
           label="Imagem"
           valor={imagem}
           aoAlterado={(valor) => setImagem(valor)}
+        />
+
+        <CampoTexto
+          label="Data de entrada no time"
+          valor={data}
+          aoAlterado={valor => setData(valor)}
+          type="date"
         />
 
         <ListaSuspensa
@@ -68,18 +84,20 @@ const Formulario = ({ aoColaboradorCadastrado, times, cadastrarTime }) => {
         }}
       >
         <h2>Preencha os dados para criar um novo time.</h2>
-        <Campo
+        <CampoTexto
           label="Nome"
           valor={nomeTime}
           aoAlterado={(valor) => setNomeTime(valor)}
         />
-        <Campo
+        <CampoTexto
           type="color"
           label="Cor"
           valor={corTime}
           aoAlterado={(valor) => setCorTime(valor)}
         />
-        <Botao>Criar um novo Time</Botao>
+        <Botao>
+          Criar um novo Time
+        </Botao>
       </form>
     </section>
   );
